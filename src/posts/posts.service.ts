@@ -11,12 +11,11 @@ export class PostsService {
       include: {
         user: {
           select: {
-            user: true
-          }
+            user: true,
+          },
         },
-        
-      }
-    })
+      },
+    });
   }
 
   createPost(userId: number, data: Prisma.PostCreateWithoutUserInput) {
