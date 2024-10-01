@@ -13,6 +13,7 @@ import {
 import { UsersService } from './users.service';
 import { createUserDto } from './dto/createUser.dto';
 import { updateUserDto } from './dto/updateUser.dto';
+import { updateUserSettingsDto } from './dto/userSettings.dto';
 
 @Controller('users')
 export class UsersController {
@@ -36,12 +37,24 @@ export class UsersController {
 
   @Put('/:id')
   @UsePipes(new ValidationPipe())
-  updateUserById(@Param('id', ParseIntPipe) id: number, @Body() data: updateUserDto) {
+  updateUserById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: updateUserDto,
+  ) {
     return this.userService.updateUserById(id, data);
+  }
+
+  @Put('/:id/settings')
+  @UsePipes(new ValidationPipe())
+  updateUserSettingsById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: updateUserSettingsDto,
+  ) {
+    return this.userService.updateUserSettingsById(id, data)
   }
 
   @Delete('/:id')
   deleteUserById(@Param('id', ParseIntPipe) id: number) {
-    
+    return this.userService.deleteUserById(id);
   }
 }
